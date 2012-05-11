@@ -1,16 +1,16 @@
 # == Schema Information
 #
-# Table name: order_ingredients
+# Table name: recipes
 #
 #  id            :integer         not null, primary key
-#  order_id      :integer
 #  ingredient_id :integer
+#  order_id      :integer
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
 #
 
-class OrderIngredient < ActiveRecord::Base
-  attr_accessible :ingredient_id, :order_id
-  belongs_to :orders
-  belongs_to :ingredients
+require 'spec_helper'
+
+describe Recipe do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

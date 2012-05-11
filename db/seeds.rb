@@ -16,3 +16,29 @@ puts 'New user created: ' << user3.name
 user.add_role :admin
 user2.add_role :cook
 user3.add_role :user
+
+puts 'SETTING UP PRODUCTS/SUBS'
+Product.delete_all
+products = Product.create([
+  { name: 'Darth Dark', description: 'Dark bread', size: 6, price: 5.95 },
+  { name: 'Vader Veggie', description: 'Sub', size: 6, price: 3.95 },
+  { name: 'Vader Veggie Plus', description: 'Sub, double cheese', size: 12, price: 5.95 },
+  { name: 'Italiano', description: 'Sub', size: 12, price: 4.95 },
+  ])
+
+puts 'SETTING UP INGREDIENTS'
+Ingredient.delete_all
+ingredients = Ingredient.create([
+  { name: 'Cheddar'},
+  { name: 'Provolone'},
+  { name: 'Lettuce'},
+  { name: 'Tomato'},
+  { name: 'Onion'},
+  { name: 'Pickle'},
+  { name: 'Mayo'},
+  { name: 'Mustard'},
+  { name: 'Banana Peppers'},
+  { name: 'Green Peppers'},
+  { name: 'Salt'},
+  { name: 'Pepper'}
+  ])

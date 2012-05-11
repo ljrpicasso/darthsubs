@@ -1,12 +1,24 @@
 <%- model_class = @order.class -%>
 <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @order.user_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:product_id) %>:</strong></dt>
-  <dd><%= @order.product_id %></dd>
-</dl>
+<div class="row">
+  <div class="span6">
+	<dl class="dl-horizontal">
+	  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+	  <dd><%= User.find(@order.user_id).name %></dd>
+	  <dt><strong><%= model_class.human_attribute_name(:product_id) %>:</strong></dt>
+	  <dd><%= Product.find(@order.product_id).name %></dd>
+	  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+	  <dd><%= @order.status_is() %></dd>
+	</dl>	
+  </div>
+  <div class="span6">
+  	<strong>Extra Ingredients</strong><br/>
+    <% for ing in @order.ingredient_ids %>
+	  <%= Ingredient.find(ing).name %><br/>
+	<% end %>
+  </div>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

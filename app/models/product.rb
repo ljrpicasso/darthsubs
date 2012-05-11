@@ -13,4 +13,15 @@
 
 class Product < ActiveRecord::Base
   attr_accessible :description, :name, :price, :size
+  has_many :orders
+  
+  def description_is
+    descriptions = []
+    descriptions << "#{name}"
+    descriptions << "#{description}"
+    descriptions << "#{size} inches"
+    descriptions << "$#{price}"
+    descriptions.join(', ')
+  end
+  
 end

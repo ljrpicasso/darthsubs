@@ -8,9 +8,8 @@
 #  updated_at :datetime        not null
 #
 
-class Ingredient < ActiveRecord::Base
-  attr_accessible :name, :orders_attributes, :recipe_attributes
-  
-  has_many :recipes
-  has_many :orders, :through => :recipes
+require 'spec_helper'
+
+describe Ingredient do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
