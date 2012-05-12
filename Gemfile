@@ -9,6 +9,7 @@ group :assets do
   gem "twitter-bootstrap-rails", ">= 2.0.3"
 end
 gem 'jquery-rails'
+gem 'rack-pjax'
 
 group :development, :test do
   gem "rspec-rails", ">= 2.9.0.rc2"

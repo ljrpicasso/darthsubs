@@ -1,5 +1,7 @@
 <% unless current_user.nil? %>
-	<h3>Welcome to DarthSubs!</h3>
+	<div class="page-header">
+		<h2>Welcome to DarthSubs!</h2>
+	</div>
 	<% if current_user.has_role? :cook %>
 	You have work to do. Please proceed to the Orders list.
 	<% elsif current_user.has_role? :admin %>
@@ -7,27 +9,10 @@
 	<% else %>
 	<div class="row">
 	  <div class="span9">
-	Here is your list of recent orders:
-	<table class="table table-striped">
-	  <thead>
-	    <tr>
-	      <th>Sandwich</th>
-	      <th>Status</th>
-	      <th>Ordered</th>
-	      <th>(Elapsed)</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <% @orders.each do |order| %>
-	      <tr>
-	        <td><%= Product.find(order.product_id).name %></td>
-	        <td><%= order.status_is %></td>
-	        <td><%= plain_date(order.created_at) %></td>
-	        <td><div id="elapsed_result_<%= order.id %>"><%= order.elapsed %></div></td>
-	      </tr>
-	    <% end %>
-	  </tbody>
-	</table>
+		<strong>Here is a list of your recent orders:</strong><br />
+		<div id="current_orders"></div>		
+			<%= render :partial => 'status_table' %>
+	  	</div>
 	</div></div>
 	<% end %>
 <% else %>

@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Sandwich</th>
+      <th>Status</th>
+      <th>Ordered at</th>
+      <th>Elapsed time since your order</th>
+    </tr>
+  </thead>
+  <tbody>
+	<div id="elapsed_result">
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= Product.find(order.product_id).name %></td>
+        <td><%= order.status_is %></td>
+        <td><%= plain_date(order.created_at) %></td>
+        <td><%= order.elapsed %></td>
+      </tr>
+    <% end %>
+	</div>
+  </tbody>
+</table>
