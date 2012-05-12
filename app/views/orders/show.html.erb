@@ -7,9 +7,11 @@
 	  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
 	  <dd><%= User.find(@order.user_id).name %></dd>
 	  <dt><strong><%= model_class.human_attribute_name(:product_id) %>:</strong></dt>
-	  <dd><%= Product.find(@order.product_id).name %></dd>
+	  <dd><%= Product.find(@order.product_id).description_is %></dd>
 	  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
 	  <dd><%= @order.status_is() %></dd>
+	  <dt><strong>Elapsed Time:</strong></dt>
+	  <dd><%= @order.elapsed() %></dd>
 	</dl>	
   </div>
   <div class="span6">
@@ -23,8 +25,10 @@
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               orders_path, :class => 'btn'  %>
+  <% if @order.status == 0 %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_order_path(@order), :class => 'btn' %>
+  <% end %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               order_path(@order),
               :method => 'delete',

@@ -3,8 +3,12 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
-
+    if (current_user.has_role? :admin) or
+       (current_user.has_role? :cook)
+       @orders = Order.all
+    else
+       @orders = Order.find_all_by_user_id(current_user.id)
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }
@@ -27,7 +31,7 @@ class OrdersController < ApplicationController
   def new
     # @order = Order.new
     @order = current_user.orders.build
-    @order.status = 1
+    @order.status = 0
     @order.user_id = current_user.id
     
     respond_to do |format|
@@ -85,4 +89,5 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

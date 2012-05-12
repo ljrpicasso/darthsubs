@@ -21,11 +21,32 @@ class Order < ActiveRecord::Base
   belongs_to :user
   
   def status_is
-    if :status == 2
+    if status == 1
       'Complete'
     else
       'In Kitchen'
     end
   end
   
+  def mark_complete
+    status = 1
+  end
+  
+  def elapsed
+    if status == 1
+      'Sandwich is complete!'
+    else
+      difference = Time.now - created_at
+
+      seconds    =  difference % 60
+      difference = (difference - seconds) / 60
+      minutes    =  difference % 60
+      difference = (difference - minutes) / 60
+      hours      =  difference % 24
+      difference = (difference - hours)   / 24
+      days       =  difference % 7
+      weeks      = (difference - days)    /  7
+      '%.0f:%02.0f:%02.0f' % [hours, minutes, seconds]
+    end
+  end
 end
