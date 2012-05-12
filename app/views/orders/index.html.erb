@@ -6,8 +6,8 @@
       <th><%= 'Customer' %></th>
       <th><%= model_class.human_attribute_name(:product_id) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%= 'Elapsed' %></th>
+      <th>Ordered</th>
+      <th>Elapsed</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
         <td><%= User.find(order.user_id).name %></td>
         <td><%= Product.find(order.product_id).name %></td>
         <td><%= order.status_is %></td>
-        <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td><%= plain_date(order.created_at) %></td>
         <td><%= order.elapsed %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),

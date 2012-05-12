@@ -19,8 +19,8 @@
         <td><%= user.email %></td>
         <td><%= user.name %></td>
         <td><%= user.sign_in_count %></td>
-        <td><%= user.last_sign_in_at %></td>
-        <td><%=l user.created_at %></td>
+        <td><%= plain_date(user.last_sign_in_at) %></td>
+        <td><%= plain_date(user.created_at) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_registration_path(user), :class => 'btn btn-mini' %>
