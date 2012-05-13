@@ -24,4 +24,12 @@ class Product < ActiveRecord::Base
     descriptions.join(', ')
   end
   
+  def short_description_is
+    descriptions = []
+    descriptions << "#{description}"
+    descriptions << "#{size} inches"
+    descriptions << "$#{price}"
+    descriptions.join(', ')
+  end
+  
 end

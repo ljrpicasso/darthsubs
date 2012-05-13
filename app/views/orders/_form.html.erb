@@ -5,7 +5,7 @@
 	  <br />
 	  <strong>Sandwich Type:</strong> <%= f.collection_select :product_id, Product.all, :id, :description_is %><br />
 	  <br /><br />
-	  <% if current_user.has_role :cook %>
+	  <% if current_user.has_role? :cook %>
 		<strong>Is This Sandwich Complete? </strong> 
 	  	<%= f.check_box :status, :as => :boolean %>
 		<br />

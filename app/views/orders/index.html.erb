@@ -15,7 +15,8 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= User.find(order.user_id).name %></td>
-        <td><%= Product.find(order.product_id).name %></td>
+        <td><%= Product.find(order.product_id).name %><br />
+			<%= Product.find(order.product_id).short_description_is %></td>
         <td><%= order.status_is %></td>
         <td><%= plain_date(order.created_at) %></td>
         <td><%= order.elapsed %></td>
