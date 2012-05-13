@@ -50,6 +50,7 @@ class OrdersController < ApplicationController
   def create
     # @order = Order.new(params[:order])
     @order = current_user.orders.build(params[:order])
+    @order.status = 0
 
     respond_to do |format|
       if @order.save
