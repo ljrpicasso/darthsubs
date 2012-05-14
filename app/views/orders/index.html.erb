@@ -1,5 +1,8 @@
 <%- model_class = Order.new.class -%>
-<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+	<h1><%= @index_title %></h1>
+<% if current_user.has_role? :admin %>
+<div class="row"><div class="span9">
+<% end %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -41,7 +44,18 @@
     <% end %>
   </tbody>
 </table>
-
+<% if current_user.has_role? :admin %>
+  </div>
+  <div class="span3">
+	<div class="well">
+		<% if session[:show_status] == 1 %>
+		Admin - refresh view to display Completed Orders.
+		<% else %>
+		Admin - refresh view to display Incomplete Orders.
+		<% end %>
+	</div>
+  </div></div>
+<% end %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_order_path,
             :class => 'btn btn-primary' %>

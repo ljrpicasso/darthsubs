@@ -1,13 +1,27 @@
 class OrdersController < ApplicationController
   
+  @@show_status = 0
+  
   # GET /orders
   # GET /orders.json
   def index
-    if (current_user.has_role? :admin) or
-       (current_user.has_role? :cook)
-       @orders = Order.all
+    session[:show_status] = 0 if session[:show_status].nil?
+    
+    if current_user.has_role? :admin
+      @orders = Order.find(:all, :order => 'status ASC, created_at ASC', :conditions => "status = #{session[:show_status]}")
+      if session[:show_status] == 0
+        session[:show_status] = 1
+        @index_title = "Incomplete Orders"
+      else
+        session[:show_status] = 0
+        @index_title = "Completed Orders"
+      end
+    elsif current_user.has_role? :cook
+       @orders = Order.find(:all, :order => 'status ASC, created_at ASC', :conditions => 'status = 0' )
+       @index_title = "Incomplete Orders"
     else
-       @orders = Order.find_all_by_user_id(current_user.id)
+       @orders = Order.find_all_by_user_id(current_user.id, :order => 'status ASC, created_at ASC')
+       @index_title = "Your Previous and Current Orders"
     end
     respond_to do |format|
       format.html # index.html.erb
